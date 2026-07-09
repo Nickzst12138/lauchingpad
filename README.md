@@ -8,7 +8,7 @@
 
 `lauchingpad` 用一个熟悉的应用网格，把旧 Launchpad 的使用感带回来：Dock 点击打开，再点一次收回；直接输入搜索；方向键选择；回车打开应用。它不修改系统自带 Launchpad，也不依赖新的 Apps launcher。
 
-[![Star History Chart](assets/star-history.svg)](https://github.com/Nickzst12138/lauchingpad/stargazers)
+[![Star History Chart](assets/star-history.png)](https://github.com/Nickzst12138/lauchingpad/stargazers)
 
 ## 为什么做这个
 
