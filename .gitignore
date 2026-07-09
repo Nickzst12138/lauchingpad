@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Xcode / Swift build output
+DerivedData/
+.build/
+source/ZZLaunchpad/build/*.app/
+source/ZZLaunchpad/build/ZZLaunchpad.app/
+source/ZZLaunchpad/build/lauchingpad.app/
+*.xcuserstate
+xcuserdata/
+
+# Logs
+*.log
