@@ -1,5 +1,7 @@
 # lauchingpad
 
+[中文说明](README.zh-CN.md)
+
 A lightweight Launchpad-style app launcher for macOS 27 beta.
 
 `lauchingpad` brings back a familiar app grid when the new macOS Apps launcher feels unstable, hard to trigger, or simply not close enough to the classic Launchpad flow. Click it from the Dock, search by typing, move with arrow keys, press Enter, and get out of the way.
@@ -97,6 +99,7 @@ The release bundle contains:
 lauchingpad-installer.dmg
 source/ZZLaunchpad/
 README.md
+README.zh-CN.md
 LICENSE
 ```
 
