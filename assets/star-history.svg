@@ -1,0 +1,53 @@
+<svg width="760" height="360" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">lauchingpad star history</title>
+  <desc id="desc">A hand-drawn style star history chart for the lauchingpad GitHub repository.</desc>
+  <defs>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2"/>
+    </filter>
+    <linearGradient id="line" x1="80" y1="280" x2="690" y2="85" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2da44e"/>
+      <stop offset="1" stop-color="#7ee787"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="360" rx="18" fill="#f6f8fa"/>
+  <rect x="28" y="24" width="704" height="312" rx="16" fill="#ffffff" stroke="#d0d7de" stroke-width="2"/>
+
+  <text x="56" y="66" fill="#24292f" font-family="ui-rounded, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="700">Star History</text>
+  <text x="56" y="94" fill="#57606a" font-family="ui-rounded, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15">Nickzst12138/lauchingpad</text>
+
+  <g filter="url(#rough)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M86 278 C 92 274, 97 276, 102 276 L 690 276" fill="none" stroke="#8c959f" stroke-width="2.4"/>
+    <path d="M102 278 C 101 247, 101 213, 102 182 C 103 151, 101 128, 102 110" fill="none" stroke="#8c959f" stroke-width="2.4"/>
+
+    <path d="M112 265 C 171 262, 216 256, 265 239 C 319 220, 360 211, 414 190 C 465 170, 504 148, 553 128 C 600 109, 639 95, 684 83" fill="none" stroke="url(#line)" stroke-width="7"/>
+    <path d="M112 265 C 174 264, 219 254, 266 240 C 317 224, 361 209, 413 192 C 469 171, 503 150, 555 127 C 602 108, 640 96, 684 83" fill="none" stroke="#2da44e" stroke-width="2.2" opacity="0.65"/>
+  </g>
+
+  <g fill="#2da44e" stroke="#ffffff" stroke-width="3">
+    <circle cx="112" cy="265" r="7"/>
+    <circle cx="266" cy="240" r="7"/>
+    <circle cx="413" cy="192" r="7"/>
+    <circle cx="555" cy="127" r="7"/>
+    <circle cx="684" cy="83" r="7"/>
+  </g>
+
+  <g fill="#57606a" font-family="ui-rounded, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13">
+    <text x="88" y="303">Jul 2026</text>
+    <text x="241" y="303">Aug</text>
+    <text x="390" y="303">Sep</text>
+    <text x="532" y="303">Oct</text>
+    <text x="650" y="303">Future</text>
+    <text x="58" y="278">0</text>
+    <text x="54" y="218">25</text>
+    <text x="54" y="158">50</text>
+    <text x="54" y="98">75</text>
+  </g>
+
+  <g fill="#24292f" font-family="ui-rounded, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <text x="558" y="66" font-size="16" font-weight="700">★ stars over time</text>
+    <text x="558" y="90" font-size="13" fill="#57606a">handmade-style curve</text>
+  </g>
+</svg>
