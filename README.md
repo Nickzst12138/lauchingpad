@@ -1,44 +1,46 @@
 # lauchingpad
 
-[中文说明](README.zh-CN.md)
+<p align="right">
+  <a href="README.en.md"><img src="https://img.shields.io/badge/English-2ea44f?style=for-the-badge" alt="English"></a>
+</p>
 
-A lightweight Launchpad-style app launcher for macOS 27 beta.
+一个给 macOS 27 beta 准备的轻量 Launchpad 风格应用启动器。
 
-`lauchingpad` brings back a familiar app grid when the new macOS Apps launcher feels unstable, hard to trigger, or simply not close enough to the classic Launchpad flow. Click it from the Dock, search by typing, move with arrow keys, press Enter, and get out of the way.
+`lauchingpad` 用一个熟悉的应用网格，把旧 Launchpad 的使用感带回来：Dock 点击打开，再点一次收回；直接输入搜索；方向键选择；回车打开应用。它不修改系统自带 Launchpad，也不依赖新的 Apps launcher。
 
 ![Star History Chart](https://api.star-history.com/svg?repos=Nickzst12138/lauchingpad&type=Date)
 
-## Why
+## 为什么做这个
 
-macOS 27 beta changes the old Launchpad experience. Some users also report that the system Apps launcher / Launchpad entry does not open reliably on beta builds.
+macOS 27 beta 改变了旧 Launchpad 的体验，也有用户遇到系统 Apps launcher / Launchpad 入口点不开、不稳定的问题。
 
-`lauchingpad` does not patch or depend on Apple's launcher. It ships as a small independent app launcher:
+`lauchingpad` 是一个独立的小型应用启动器：
 
-- Scans installed apps from `/Applications`, user Applications, and system Applications.
-- Shows a clean application grid with icons and names.
-- Opens from the Dock and hides on the next Dock click.
-- Supports instant keyboard search.
-- Supports arrow-key selection and Enter-to-open.
-- Hides with Esc.
-- Hides automatically after launching an app.
-- Keeps the real launcher window out of Cmd-Tab.
-- Starts quietly at login so it is ready without popping up.
+- 扫描 `/Applications`、用户 Applications 和系统 Applications 目录。
+- 以网格展示应用图标和名称。
+- 从 Dock 打开，再点 Dock 图标收回。
+- 支持输入即搜索。
+- 支持方向键选择和回车打开。
+- 支持 Esc 隐藏。
+- 打开某个应用后自动隐藏。
+- 真实窗口服务不进入 Cmd-Tab。
+- 登录后安静预热，不主动弹窗。
 
-## Download
+## 下载和安装
 
-The install image is included in this repository:
+安装镜像已经放在仓库里：
 
 ```text
 lauchingpad-installer.dmg
 ```
 
-Open the DMG, then run:
+打开 DMG，然后运行：
 
 ```text
 Install lauchingpad.pkg
 ```
 
-The installer places:
+安装器会写入：
 
 ```text
 /Applications/lauchingpad.app
@@ -46,102 +48,103 @@ The installer places:
 /Library/LaunchAgents/com.nick.lauchingpad.launchagent.plist
 ```
 
-It also pins `lauchingpad.app` to the Dock.
+同时会把 `lauchingpad.app` 固定到 Dock。
 
-macOS may ask for an administrator password and may show a background item / login item prompt. That is expected because the installer writes into `/Applications`, installs a LaunchAgent, and updates Dock items.
+macOS 可能会要求管理员密码，也可能提示后台项目 / 登录项权限。这是正常现象，因为安装器需要写入 `/Applications`、安装 LaunchAgent，并更新 Dock 固定项。
 
-## How It Works
+## 工作原理
 
-Version 2.2 uses a two-app design:
+2.2 版本采用双 app 结构：
 
 ```text
-lauchingpad.app          Dock entry and click toggle
-lauchingpad-agent.app    Background window service
+lauchingpad.app          Dock 入口和点击 toggle
+lauchingpad-agent.app    后台窗口服务
 ```
 
-`lauchingpad.app` is the visible Dock app. It receives your click, sends an open/hide request to the agent, then exits.
+`lauchingpad.app` 是 Dock 上可见的入口。它接收点击，把打开 / 隐藏请求交给后台服务，然后自己退出。
 
-`lauchingpad-agent.app` owns the real launcher window. It runs as an `LSUIElement`, so it does not show an extra Dock icon and does not appear as a normal Cmd-Tab app. Login starts the agent with `--start-hidden`, which keeps it warm without showing the launcher.
+`lauchingpad-agent.app` 负责真正的启动器窗口。它设置为 `LSUIElement`，所以不会显示额外 Dock 图标，也不会像普通应用一样出现在 Cmd-Tab 里。登录启动时会带上 `--start-hidden`，后台预热但不弹窗。
 
-The agent also checks for duplicate instances. This prevents login startup and Dock clicks from creating multiple background services.
+agent 还会检查重复实例，避免登录自启动和 Dock 点击各启动一个后台服务。
 
-## Usage
+## 使用方式
 
-| Action | Result |
+| 操作 | 效果 |
 | --- | --- |
-| Click Dock icon | Open launcher |
-| Click Dock icon again | Hide launcher |
-| Type | Search apps immediately |
-| Arrow keys | Move selection |
-| Enter | Open selected app |
-| Esc | Hide launcher |
+| 点击 Dock 图标 | 打开启动器 |
+| 再点一次 Dock 图标 | 隐藏启动器 |
+| 直接输入 | 立即搜索应用 |
+| 方向键 | 移动选择 |
+| Enter | 打开当前选中应用 |
+| Esc | 隐藏启动器 |
 
-## Source Layout
+## 源码结构
 
 ```text
 source/ZZLaunchpad/
 ├── Sources/
-│   ├── main.swift          # background launcher window service
-│   ├── launcher.swift      # Dock entry / toggle command app
-│   └── make_icon.swift     # icon generation helper
+│   ├── main.swift          # 后台启动器窗口服务
+│   ├── launcher.swift      # Dock 入口 / toggle 命令 app
+│   └── make_icon.swift     # 图标生成辅助脚本
 ├── Info.plist              # Dock app plist
-├── Agent-Info.plist        # background agent plist
-└── build/icon.iconset/     # app icon assets
+├── Agent-Info.plist        # 后台 agent plist
+└── build/icon.iconset/     # app 图标资源
 ```
 
-## Build Notes
+## 构建说明
 
-The current package was built for Apple Silicon and targets macOS 26.0 as the minimum runtime version, so it can run on the current macOS 27 beta without being marked as a too-new binary by LaunchServices.
+当前安装包面向 Apple Silicon 构建，最低运行版本设置为 macOS 26.0，因此可以在当前 macOS 27 beta 上运行，同时避免被 LaunchServices 识别成过新的二进制。
 
-The release bundle contains:
+发布包包含：
 
 ```text
 lauchingpad-installer.dmg
 source/ZZLaunchpad/
 README.md
-README.zh-CN.md
+README.md
+README.en.md
 LICENSE
 ```
 
-## Changelog
+## 更新记录
 
 ### 2.2
 
-- Split into `lauchingpad.app` and `lauchingpad-agent.app`.
-- Kept the Dock icon stable while keeping the real window service out of Cmd-Tab.
-- Added login startup through `lauchingpad-agent.app --start-hidden`.
-- Added duplicate-agent detection so Dock clicks do not spawn extra services.
-- Installed both apps through the package installer.
-- Built with minimum macOS target `26.0` for current macOS 27 beta compatibility.
+- 拆分为 `lauchingpad.app` 和 `lauchingpad-agent.app`。
+- 保持 Dock 图标稳定，同时让真实窗口服务不进入 Cmd-Tab。
+- 通过 `lauchingpad-agent.app --start-hidden` 实现登录启动。
+- 增加后台 agent 去重，避免 Dock 点击生成额外服务。
+- 安装器同时安装两个 app。
+- 最低系统目标设为 `26.0`，兼容当前 macOS 27 beta。
 
 ### 2.1
 
-- Restored permanent Dock behavior after hiding the window.
-- Avoided switching the visible Dock entry into a background-only app.
+- 恢复窗口隐藏后的 Dock 常驻行为。
+- 避免把可见 Dock 入口切成后台型 app。
 
 ### 2.0
 
-- Tested single-app background switching after hide.
-- Replaced this approach because it removed the Dock entry.
+- 测试过单 app 隐藏后切换后台型的方案。
+- 因为会导致 Dock 入口消失，最终替换为双 app 结构。
 
 ### 1.9
 
-- Added DMG installer packaging.
-- Added login startup LaunchAgent.
-- Added automatic Dock pinning.
+- 增加 DMG 安装器打包。
+- 增加登录自启动 LaunchAgent。
+- 增加自动固定 Dock。
 
 ### 1.8
 
-- Added Dock click toggle behavior.
-- Added Esc-to-hide.
-- Added auto-hide after opening an app.
-- Improved search field behavior.
-- Fixed stale keyboard-selection highlight.
-- Added system Apps / Launchpad icon styling.
+- 增加 Dock 点击 toggle。
+- 增加 Esc 隐藏。
+- 打开应用后自动隐藏。
+- 优化搜索框行为。
+- 修复键盘选择时旧高亮残留。
+- 使用系统 Apps / Launchpad 图标风格。
 
-## Uninstall
+## 卸载
 
-Remove these files:
+删除这些文件：
 
 ```text
 /Applications/lauchingpad.app
@@ -149,12 +152,12 @@ Remove these files:
 /Library/LaunchAgents/com.nick.lauchingpad.launchagent.plist
 ```
 
-Then remove `lauchingpad` from the Dock with:
+然后从 Dock 移除 `lauchingpad`：
 
 ```text
-Right click Dock icon -> Options -> Remove from Dock
+右键 Dock 图标 -> 选项 -> 从 Dock 中移除
 ```
 
-## License
+## 许可证
 
-MIT License. See [LICENSE](LICENSE).
+MIT License。见 [LICENSE](LICENSE)。
