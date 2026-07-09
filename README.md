@@ -105,42 +105,6 @@ README.en.md
 LICENSE
 ```
 
-## 更新记录
-
-### 2.2
-
-- 拆分为 `lauchingpad.app` 和 `lauchingpad-agent.app`。
-- 保持 Dock 图标稳定，同时让真实窗口服务不进入 Cmd-Tab。
-- 通过 `lauchingpad-agent.app --start-hidden` 实现登录启动。
-- 增加后台 agent 去重，避免 Dock 点击生成额外服务。
-- 安装器同时安装两个 app。
-- 最低系统目标设为 `26.0`，兼容当前 macOS 27 beta。
-
-### 2.1
-
-- 恢复窗口隐藏后的 Dock 常驻行为。
-- 避免把可见 Dock 入口切成后台型 app。
-
-### 2.0
-
-- 测试过单 app 隐藏后切换后台型的方案。
-- 因为会导致 Dock 入口消失，最终替换为双 app 结构。
-
-### 1.9
-
-- 增加 DMG 安装器打包。
-- 增加登录自启动 LaunchAgent。
-- 增加自动固定 Dock。
-
-### 1.8
-
-- 增加 Dock 点击 toggle。
-- 增加 Esc 隐藏。
-- 打开应用后自动隐藏。
-- 优化搜索框行为。
-- 修复键盘选择时旧高亮残留。
-- 使用系统 Apps / Launchpad 图标风格。
-
 ## 卸载
 
 删除这些文件：

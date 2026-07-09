@@ -105,42 +105,6 @@ README.md
 LICENSE
 ```
 
-## Changelog
-
-### 2.2
-
-- Split into `lauchingpad.app` and `lauchingpad-agent.app`.
-- Kept the Dock icon stable while keeping the real window service out of Cmd-Tab.
-- Added login startup through `lauchingpad-agent.app --start-hidden`.
-- Added duplicate-agent detection so Dock clicks do not spawn extra services.
-- Installed both apps through the package installer.
-- Built with minimum macOS target `26.0` for current macOS 27 beta compatibility.
-
-### 2.1
-
-- Restored permanent Dock behavior after hiding the window.
-- Avoided switching the visible Dock entry into a background-only app.
-
-### 2.0
-
-- Tested single-app background switching after hide.
-- Replaced this approach because it removed the Dock entry.
-
-### 1.9
-
-- Added DMG installer packaging.
-- Added login startup LaunchAgent.
-- Added automatic Dock pinning.
-
-### 1.8
-
-- Added Dock click toggle behavior.
-- Added Esc-to-hide.
-- Added auto-hide after opening an app.
-- Improved search field behavior.
-- Fixed stale keyboard-selection highlight.
-- Added system Apps / Launchpad icon styling.
-
 ## Uninstall
 
 Remove these files:
