@@ -101,7 +101,6 @@ source/ZZLaunchpad/
 lauchingpad-installer.dmg
 source/ZZLaunchpad/
 README.md
-README.md
 README.en.md
 LICENSE
 ```
